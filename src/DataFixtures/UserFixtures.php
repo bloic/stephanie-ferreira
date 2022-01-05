@@ -9,7 +9,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
-    private $hashPassword;
+    private UserPasswordHasherInterface $hashPassword;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
