@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -37,6 +39,14 @@ class Article
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'articles')]
     private $user_id;
+
+    #[ORM\OneToMany(mappedBy: 'article_id', targetEntity: Commentary::class)]
+    private $commentaries;
+
+    public function __construct()
+    {
+        $this->commentaries = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -104,6 +114,36 @@ class Article
     public function setUserId(?User $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentary[]
+     */
+    public function getCommentaries(): Collection
+    {
+        return $this->commentaries;
+    }
+
+    public function addCommentary(Commentary $commentary): self
+    {
+        if (!$this->commentaries->contains($commentary)) {
+            $this->commentaries[] = $commentary;
+            $commentary->setArticleId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentary(Commentary $commentary): self
+    {
+        if ($this->commentaries->removeElement($commentary)) {
+            // set the owning side to null (unless already changed)
+            if ($commentary->getArticleId() === $this) {
+                $commentary->setArticleId(null);
+            }
+        }
 
         return $this;
     }
