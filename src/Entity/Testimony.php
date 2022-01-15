@@ -19,8 +19,8 @@ class Testimony
     #[ORM\Column(type: 'text')]
     private string $content;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $createAt;
+    #[ORM\Column(type: 'date')]
+    private ?\DateTimeInterface $createAt;
 
     #[ORM\Column(type: 'boolean')]
     private bool $isValid;
@@ -54,12 +54,12 @@ class Testimony
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeImmutable
+    public function getCreateAt(): ?\DateTimeInterface
     {
         return $this->createAt;
     }
 
-    public function setCreateAt(\DateTimeImmutable $createAt): self
+    public function setCreateAt(\DateTimeInterface $createAt): self
     {
         $this->createAt = $createAt;
 
