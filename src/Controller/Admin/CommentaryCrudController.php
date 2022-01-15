@@ -26,7 +26,8 @@ class CommentaryCrudController extends AbstractCrudController
         return [
             TextEditorField::new('content'),
             BooleanField::new('isPublish'),
-            DateField::new('createAt')
+            DateField::new('createAt'),
+            BooleanField::new('isValid')
         ];
     }
 
