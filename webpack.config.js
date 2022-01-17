@@ -16,7 +16,7 @@ Encore
     .copyFiles([
         {
         from: './assets/images',
-        to: 'image/[path][name].[hash:8].[ext]',
+        to: 'images/[path][name].[hash:8].[ext]',
         }
     ])
 
@@ -27,6 +27,7 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('login', './assets/styles/login.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
