@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 $primary:#047ac9;
 $secondary:#db0a5a;
 $tertiary:#31aa24;
@@ -6,3 +9,6 @@ $info: darken($primary, 50%);
 
 $navbar-dark-color: $tertiary;
 $navbar-dark-hover-color: $secondary;
+
+$font-title: 'Ubuntu', sans-serif;
+$font-text:'roboto', sans-serif;
