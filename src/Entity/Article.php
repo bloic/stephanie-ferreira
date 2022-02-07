@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -37,7 +39,15 @@ class Article
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private string $user;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentary::class)]
+    private $commentary;
+
+    public function __construct()
+    {
+        $this->commentary = new ArrayCollection();
+    }
 
 
 
@@ -107,6 +117,36 @@ class Article
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentary[]
+     */
+    public function getCommentary(): Collection
+    {
+        return $this->commentary;
+    }
+
+    public function addCommentary(Commentary $commentary): self
+    {
+        if (!$this->commentary->contains($commentary)) {
+            $this->commentary[] = $commentary;
+            $commentary->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentary(Commentary $commentary): self
+    {
+        if ($this->commentary->removeElement($commentary)) {
+            // set the owning side to null (unless already changed)
+            if ($commentary->getArticle() === $this) {
+                $commentary->setArticle(null);
+            }
+        }
 
         return $this;
     }

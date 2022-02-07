@@ -22,6 +22,9 @@ class Commentary
     #[ORM\Column(type: 'boolean')]
     private bool $isPublish;
 
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'commentary')]
+    private $article;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Commentary
     public function setIsPublish(bool $isPublish): self
     {
         $this->isPublish = $isPublish;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
 
         return $this;
     }
