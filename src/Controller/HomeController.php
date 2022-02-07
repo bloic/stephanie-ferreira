@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/index.html.twig', [
-            'articles'=> $articles->findAll()
+            'articles'=> $articles->findBy([],['date'=>'DESC'],'2')
         ]);
     }
 }
