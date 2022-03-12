@@ -39,18 +39,17 @@ class Article
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private string $user;
+    private $user;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentary::class)]
-    private $commentary;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $title;
+
 
     public function __construct()
     {
-        $this->commentary = new ArrayCollection();
+        $this->date = new \DateTime('now');
     }
-
-
-
 
     public function getId(): ?int
     {
@@ -121,34 +120,21 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|Commentary[]
-     */
-    public function getCommentary(): Collection
+
+    public function __toString(): string
     {
-        return $this->commentary;
+         return $this->content;
     }
 
-    public function addCommentary(Commentary $commentary): self
+    public function getTitle(): ?string
     {
-        if (!$this->commentary->contains($commentary)) {
-            $this->commentary[] = $commentary;
-            $commentary->setArticle($this);
-        }
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
-
-    public function removeCommentary(Commentary $commentary): self
-    {
-        if ($this->commentary->removeElement($commentary)) {
-            // set the owning side to null (unless already changed)
-            if ($commentary->getArticle() === $this) {
-                $commentary->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

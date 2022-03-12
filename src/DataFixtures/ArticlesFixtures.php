@@ -18,6 +18,7 @@ class ArticlesFixtures extends Fixture implements DependentFixtureInterface
         for($i = 0; $i <= 5; $i++ ) {
             $articles = new Article();
             $articles
+                ->setTitle($faker->word)
                 ->setContent($faker->realText('200'))
                 ->setDate($faker->dateTimeThisYear)
                 ->setPicture('https://picsum.photos/450/350')
