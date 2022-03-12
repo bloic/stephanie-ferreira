@@ -11,23 +11,45 @@ class Commentary
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private int $id;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $name;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $content;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $createAt;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createAt;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $isPublish;
+    private bool $IsPublish = false;
 
-    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'commentary')]
+    #[ORM\ManyToOne(targetEntity: Article::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $article;
+
+    public function __construct()
+    {
+        $this->createAt = new \DateTime('now');
+
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getContent(): ?string
@@ -42,12 +64,12 @@ class Commentary
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeImmutable
+    public function getCreateAt(): ?\DateTimeInterface
     {
         return $this->createAt;
     }
 
-    public function setCreateAt(\DateTimeImmutable $createAt): self
+    public function setCreateAt(\DateTimeInterface $createAt): self
     {
         $this->createAt = $createAt;
 
@@ -56,12 +78,12 @@ class Commentary
 
     public function getIsPublish(): ?bool
     {
-        return $this->isPublish;
+        return $this->IsPublish;
     }
 
-    public function setIsPublish(bool $isPublish): self
+    public function setIsPublish(bool $IsPublish): self
     {
-        $this->isPublish = $isPublish;
+        $this->IsPublish = $IsPublish;
 
         return $this;
     }
@@ -77,4 +99,5 @@ class Commentary
 
         return $this;
     }
+
 }
