@@ -24,13 +24,15 @@
             </div>
         </div>
         <div class="d-flex flex-column mx-4">
-            {%  include('commentary/_form.html.twig') with {'label_button': 'Valider' }%}
+            {% include('commentary/_form.html.twig') with {'label_button': 'Valider' } %}
         </div>
         <div>
-            {{ dump(commentaries) }}
             {% for commentary in commentaries %}
-                <p> {{ commentary.content }}</p>
-            {% endfor%}
+                {% if commentary.isPublish == 1 %}
+                    <h2>{{ commentary.name }}</h2>
+                    <p> {{ commentary.content }}</p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 

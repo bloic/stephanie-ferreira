@@ -38,13 +38,14 @@ class BlogController extends AbstractController
         $form = $this->createForm(CommentaryType::class, $commentaries);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $commentaries->setArticle($id);
             $entityManager->persist($commentaries);
             $entityManager->flush();
         }
 
         return $this->render('blog/detailPost.html.twig', [
             'article' => $article->findOneBy(['id' => $id]),
-            'commentaries' => $commentaryRepository->findOneBy(['article_id' => $id]),
+            'commentaries' => $commentaryRepository->findBy(['article' => $id],['createAt'=>'DESC']),
             'form' => $form->createView(),
         ]);
 
