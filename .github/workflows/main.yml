@@ -41,7 +41,6 @@ jobs:
       # PHP CS FIXER
       - name: PHP-CS-Fixer
         run: |
-          composer require symfony/polyfill-php80
           composer require friendsofphp/php-cs-fixer
           ./vendor/bin/php-cs-fixer fix --dry-run
 
