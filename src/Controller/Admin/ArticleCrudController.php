@@ -28,5 +28,4 @@ class ArticleCrudController extends AbstractCrudController
             TextEditorField::new('content'),
         ];
     }
-
 }

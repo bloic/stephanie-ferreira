@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
-    #[route('/admin',name: 'admin_home')]
+    #[route('/admin', name: 'admin_home')]
     public function index(): Response
     {
         return $this->render('admin/dashboard.html.twig');
@@ -31,8 +31,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Article', 'fa fa-newspaper', Article::class);
-        yield MenuItem::linkToCrud('commentaire','fa fa-comment', Commentary::class);
-        yield MenuItem::linkToCrud('témoignage','fa fa-comment-dots', Testimony::class);
-
+        yield MenuItem::linkToCrud('commentaire', 'fa fa-comment', Commentary::class);
+        yield MenuItem::linkToCrud('témoignage', 'fa fa-comment-dots', Testimony::class);
     }
 }

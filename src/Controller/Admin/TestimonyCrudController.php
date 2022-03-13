@@ -23,7 +23,7 @@ class TestimonyCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index','témoignage');
+            ->setPageTitle('index', 'témoignage');
     }
 
     public function configureFields(string $pageName): iterable
@@ -41,5 +41,4 @@ class TestimonyCrudController extends AbstractCrudController
         return $actions
             ->disable(Action::NEW);
     }
-
 }

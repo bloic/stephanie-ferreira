@@ -18,7 +18,6 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-
         $user = new User();
         $user->setEmail('admin@stephanieferreira.fr');
         $user->setRoles(['ROLE_ADMIN']);

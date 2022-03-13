@@ -3,12 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[Vich\Uploadable]
@@ -26,20 +23,20 @@ class Article
     private ?\DateTimeInterface $date;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $picture;
+    private ?string $picture = null;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="article_images", fileNameProperty="picture")
      *
-     * @var File
+     * @var File|null
      */
-    private File $imageFile;
+    private ?File $imageFile = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private ?User $user;
 
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -96,7 +93,7 @@ class Article
     {
         $this->imageFile = $picture;
 
-        if ($picture) {
+        if (null !== $picture) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->date = new \DateTime('now');
@@ -123,7 +120,10 @@ class Article
 
     public function __toString(): string
     {
-         return $this->content;
+        if (is_null($this->content)) {
+            return 'NULL';
+        }
+        return $this->content;
     }
 
     public function getTitle(): ?string

@@ -27,12 +27,11 @@ class Commentary
 
     #[ORM\ManyToOne(targetEntity: Article::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $article;
+    private ?Article $article;
 
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
-
     }
 
     public function getId(): ?int
@@ -99,5 +98,4 @@ class Commentary
 
         return $this;
     }
-
 }

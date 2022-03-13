@@ -26,14 +26,13 @@ class BlogController extends AbstractController
 
 
     #[Route('/{id}', name: 'detailPost', methods: ['GET', 'POST'])]
-    public function detailPost(ArticleRepository      $article,
-                               Request                $request,
-                               CommentaryRepository   $commentaryRepository,
-                               EntityManagerInterface $entityManager,
-                               Article                $id
-
-    ): Response
-    {
+    public function detailPost(
+        ArticleRepository      $article,
+        Request                $request,
+        CommentaryRepository   $commentaryRepository,
+        EntityManagerInterface $entityManager,
+        Article                $id
+    ): Response {
         $commentaries = new Commentary();
         $form = $this->createForm(CommentaryType::class, $commentaries);
         $form->handleRequest($request);
@@ -45,9 +44,8 @@ class BlogController extends AbstractController
 
         return $this->render('blog/detailPost.html.twig', [
             'article' => $article->findOneBy(['id' => $id]),
-            'commentaries' => $commentaryRepository->findBy(['article' => $id],['createAt'=>'DESC']),
+            'commentaries' => $commentaryRepository->findBy(['article' => $id], ['createAt'=>'DESC']),
             'form' => $form->createView(),
         ]);
-
     }
 }

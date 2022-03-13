@@ -26,9 +26,10 @@
         <div class="d-flex flex-column mx-4">
             {% include('commentary/_form.html.twig') with {'label_button': 'Valider' } %}
         </div>
+        <div class="my-3 border-top border-2 border-primary"></div>
         <div>
             {% for commentary in commentaries %}
-                {% if commentary.isPublish == 1 %}
+                {% if commentary.isPublish != 0 %}
                     <h2>{{ commentary.name }}</h2>
                     <p> {{ commentary.content }}</p>
                 {% endif %}

@@ -15,7 +15,7 @@ class ArticlesFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for($i = 0; $i <= 5; $i++ ) {
+        for ($i = 0; $i <= 5; $i++) {
             $articles = new Article();
             $articles
                 ->setTitle($faker->word)
@@ -24,7 +24,6 @@ class ArticlesFixtures extends Fixture implements DependentFixtureInterface
                 ->setPicture('https://picsum.photos/450/350')
                 ->setUser($this->getReference('user_'));
             $manager->persist($articles);
-
         }
         $manager->flush();
     }

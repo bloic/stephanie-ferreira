@@ -14,13 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/commentary')]
 class CommentaryController extends AbstractController
 {
-    #[Route('/', name: 'commentary_index', methods: ['GET'])]
-    public function index(CommentaryRepository $commentaryRepository): Response
-    {
-        return $this->render('commentary/index.html.twig', [
-            'commentaries' => $commentaryRepository->findAll(),
-        ]);
-    }
 
     #[Route('/new', name: 'commentary_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -42,41 +35,5 @@ class CommentaryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'commentary_show', methods: ['GET'])]
-    public function show(Commentary $commentary): Response
-    {
-        return $this->render('commentary/show.html.twig', [
-            'commentary' => $commentary,
-        ]);
-    }
 
-    #[Route('/{id}/edit', name: 'commentary_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Commentary $commentary, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(CommentaryType::class, $commentary);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('commentary_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('commentary/edit.html.twig', [
-            'commentary' => $commentary,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'commentary_delete', methods: ['POST'])]
-    public function delete(Request $request, Commentary $commentary, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$commentary->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($commentary);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('commentary_index', [], Response::HTTP_SEE_OTHER);
-    }
 }
-

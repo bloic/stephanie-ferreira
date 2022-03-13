@@ -1,5 +1,6 @@
 .idea
 .DS_Store
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -9,6 +10,12 @@
 /var/
 /vendor/
 public/uploads
+
+### php cs fixer
+
+tools
+.php-cs-fixer.cache
+
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
