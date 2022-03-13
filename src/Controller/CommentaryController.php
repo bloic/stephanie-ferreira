@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/commentary')]
 class CommentaryController extends AbstractController
 {
-
     #[Route('/new', name: 'commentary_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -34,6 +33,4 @@ class CommentaryController extends AbstractController
             'form' => $form,
         ]);
     }
-
-
 }
