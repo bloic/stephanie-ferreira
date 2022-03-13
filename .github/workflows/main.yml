@@ -39,10 +39,10 @@ jobs:
         run: symfony check:security
 
       # PHP CS FIXER
-      - name: PHP-CS-Fixer
-        run: |
-          composer require friendsofphp/php-cs-fixer
-          ./vendor/bin/php-cs-fixer fix src --dry-run
+      #- name: PHP-CS-Fixer
+      # run: |
+      #  composer require friendsofphp/php-cs-fixer
+      # ./vendor/bin/php-cs-fixer fix src --dry-run
 
       # PHP STAN
       - name: PHP Stan
