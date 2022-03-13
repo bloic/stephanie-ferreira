@@ -41,10 +41,11 @@ jobs:
       # PHP CS FIXER
       - name: PHP-CS-Fixer
         run: |
+          composer require symfony/polyfill-php80
           composer require friendsofphp/php-cs-fixer
           ./vendor/bin/php-cs-fixer fix --dry-run
 
-                # PHP STAN
+      # PHP STAN
       - name: PHP Stan
         run: |
           ./vendor/bin/simple-phpunit install
