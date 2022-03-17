@@ -3,10 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -27,5 +26,13 @@ class ArticleCrudController extends AbstractCrudController
             TextField::new('picture'),
             TextEditorField::new('content'),
         ];
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+     if ($entityInstance instanceof Article) {
+         $entityInstance->setUser($this->getUser());
+        parent::persistEntity($entityManager,$entityInstance);
+     };
     }
 }

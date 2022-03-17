@@ -26,7 +26,18 @@ class UserFixtures extends Fixture
             'Adminpassword'
         ));
         $manager->persist($user);
+
+
+        $user = new User();
+        $user->setEmail('superadmin@loic.benos.fr');
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setPassword($this->hashPassword->hashPassword(
+            $user,
+            'Adminpassword'
+        ));
+        $manager->persist($user);
         $this->addReference('user_', $user);
+
 
 
         $manager->flush();
