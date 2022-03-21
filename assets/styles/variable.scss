@@ -1,15 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-$primary:#047ac9;
-$secondary:#db0a5a;
-$tertiary:#31aa24;
-$quarter:#638FA2;
+$primary: #355BE1;
+$secondary: #111D46;
+$light: #fff;
 
-$info: darken($primary, 50%);
+$font-title: 'Poppins', sans-serif;
 
-$navbar-dark-color: $tertiary;
-$navbar-dark-hover-color: $secondary;
 
-$font-title: 'Ubuntu', sans-serif;
-$font-text:'roboto', sans-serif;
+
